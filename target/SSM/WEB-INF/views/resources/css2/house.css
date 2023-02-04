@@ -1,0 +1,187 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color: #f2f3f5;
+}
+
+.about {
+	background-color: #f2f3f5;
+	box-shadow: darkgrey 0px 10px 30px 5px;
+}
+
+.about-context {
+	float: right;
+	right: -100px;
+	padding: 10px;
+}
+
+input {
+	width: 600px;
+	height: 40px;
+	outline: none;
+	font-size: 18px;
+	letter-spacing: 2px;
+	text-indent: 12px;
+	background-color: #f2f3f5;
+}
+
+input::-webkit-input-placeholder {
+	padding-left: 6;
+}
+
+.about button {
+	width: 70px;
+	height: 40px;
+	margin-left: 10px;
+	border-radius: 8px;
+	background-color: #228B22;
+	border: 0;
+}
+
+.about-main {
+	width: 1170px;
+	background-color: white;
+}
+
+.rowes {
+	padding: 10px 0;
+	display: flex;
+}
+
+span {
+	display: inline-block;
+	font-size: 18px;
+	text-align: center;
+	padding: 5px;
+}
+
+.selected span:hover {
+	cursor: pointer;
+}
+
+.title {
+	width: 95px;
+	height: 26px;
+	line-height: 26px;
+	font-weight: 700;
+	text-align: center;
+}
+
+.selected {
+	width: 1100px;
+}
+
+.selected span {
+	margin: 6px 2px;
+	padding: 5px;
+	border-radius: 8px;
+}
+.selected span.active{
+	background-color: rgb(34,139,34);
+}
+
+/* 房源展示 */
+.result {
+	background-color: white;
+	box-shadow: darkgrey 0px 10px 30px 5px;
+	padding: 16px;
+}
+
+.resulted {
+	margin-top: -19px;
+	margin-bottom: 15px;
+	background-color: white;
+	box-shadow: darkgrey 0px 0px 30px 0px;
+}
+
+.search {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 10px 0;
+	margin-top: 20px;
+}
+
+.search button {
+	padding: 5px;
+}
+
+.search span {
+	/*margin: 0 10px;*/
+	padding: 5px 10px;
+}
+
+.maxText {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.sel {
+	background-color: #f2f3f5;
+	width: 1167px;
+	margin-left: -15px;
+	padding-left: 15px;
+}
+
+.tar {
+	display: inline-block;
+	background-color: #228B22;
+	margin:  8px 10px;
+	border-radius: 12px;
+}
+
+.tar_sel {
+	cursor: pointer;
+}
+
+.modal {
+	text-align: center;
+}
+
+.modal:after {
+	display: inline-block;
+	height: 100%;
+	margin-left: -0.05em;
+	content: "";
+	vertical-align: middle;
+}
+
+.modal-dialog {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.modal-body .sourceInfo {
+	display: flex;
+}
+
+.modal-body .sourceInfo>div {
+	text-align: start;
+	margin-left: -60px;
+}
+
+.modal-body .sourceInfo>div>span {
+	display: inline-block;
+	margin: 3px 0;
+}
+
+.modal-body h1 {
+	margin-top: -10px;
+	padding: 10px;
+	border-bottom: 2px solid #808080;
+	text-align: start;
+	font-size: 22px;
+}
+
+.modal-body img {
+	width: 60%;
+	height: 390px;
+}
+.modal-body .rent {
+	font-size: 30px;
+	margin: 10px 0;
+}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cykj.mapper.TbHouseMapper">
+
+
+    <!--    List<TbHouse> findHouse(
+            @Param("provId") Integer provId,
+            @Param("cityId") Integer cityId,
+            @Param("search") String search,
+            @Param("areaId") Integer areaId,
+            @Param("townId") Integer townId,
+            @Param("roomNum") Integer roomNum,
+            @Param("livingroomNum") Integer livingroomNum,
+            @Param("fromRent") Integer fromRent,
+            @Param("endRent") Integer endRent);
+    -->
+    <select id="findHouse" resultType="com.cykj.bean.TbHouse">
+        select h.*, c.*, a.* from tb_house h
+        join tb_community c on h.tocommunityId = c.communityId
+        join tb_area a on c.toareaId = a.areaId
+        <trim prefix="and" suffixOverrides="and || or">
+            <if test="provId != 0 and cityId == 0">
+                a.areaId in (select areaId from tb_area where pid = #{provId}) and
+            </if>
+            <if test="cityId != 0">
+                a.areaId in (select areaId from tb_area where pid = #{cityId}) and
+            </if>
+            <if test="areaId != 0">
+                c.toareaId = #{areaId} and
+            </if>
+            <if test="search != null and search != ''">
+                c.communityName like '${search}' and
+            </if>
+            <if test="townId != 0">
+                c.communityId = #{townId} and
+            </if>
+            <if test="roomNum != 0 and livingroomNum != 0">
+                h.roomNum = #{roomNum} and h.livingroomNum = #{livingroomNum} and
+            </if>
+            <if test="fromRent != 0 and endRent != 0">
+                h.money between #{fromRent} and #{endRent}
+            </if>
+        </trim>
+    </select>
+
+</mapper>

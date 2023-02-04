@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cykj.mapper.TbRenterMapper">
+
+    <!--TbRenter login(@Param("userAcc")String userAcc, @Param("password")String password);-->
+    <select id="login" resultType="com.cykj.bean.TbRenter">
+        select * from tb_renter where renterAcc=#{userAcc}
+        <if test="password != null and password != ''">
+            and renterPwd=#{password}
+        </if>
+    </select>
+
+    <!--int register(@Param("renter") TbRenter tbRenter);-->
+    <insert id="register">
+        insert into tb_renter
+        values(null, #{renter.renterAcc}, #{renter.renterPwd},
+        #{renter.renterName}, #{renter.renterTel}, #{renter.renterIdNum},
+        #{renter.contactAddr})
+    </insert>
+
+    <!-- int insertApply(@Param("apply")TbRenter tbRenter, @Param("renterId") int renterId);-->
+    <insert id="insertApply">
+        insert into tb_apply
+        values(null, #{renterId}, #{apply.areaName}, #{apply.birthday},
+        #{apply.idCardImg}, #{apply.rebookPerImg}, #{apply.familyIncome},
+        #{apply.enType}, #{apply.houseArea}, #{apply.grabookImg},
+        #{apply.remarks}, #{apply.applyState}, #{apply.phone},
+        #{apply.applyName}, #{apply.familySum},#{apply.idCard}, null)
+    </insert>
+
+    <!--    int insertFamily(@Param("renterId")int renterId, @Param("familyList") List<TbFamily> list);-->
+    <insert id="insertFamily">
+        insert into tb_family values
+        <foreach collection="familyList" item="fam" separator=",">
+            (null, #{renterId}, #{fam.familyName}, #{fam.familyIdCard}, #{fam.familyBirthday},
+            #{fam.familyTel}, #{fam.familyCardImg}, #{fam.familyReBookImg}, #{fam.work}, #{fam.relation})
+        </foreach>
+    </insert>
+
+    <select id="selectApplyById" resultType="com.cykj.bean.TbApply">
+        select * from tb_apply where renterId=#{renterId}
+    </select>
+
+    <!--List<TbFamily> selectFamilyById(@Param("renterId")int renterId);-->
+    <select id="selectFamilyById" resultType="com.cykj.bean.TbFamily">
+        select * from tb_family where renterId=#{renterId}
+    </select>
+
+    <delete id="deleteFamilyById">
+        delete from tb_family where renterId=#{renterId}
+    </delete>
+
+    <update id="updateApplyById">
+        update tb_apply set areaName=#{apply.areaName}, birthday=#{apply.birthday},
+        idCardImg=#{apply.idCardImg}, rebookPerImg=#{apply.rebookPerImg},
+        familyIncome=#{apply.familyIncome}, enType=#{apply.enType}, houseArea=#{apply.houseArea},
+        grabookImg=#{apply.grabookImg}, remarks=#{apply.remarks}, applyState=#{apply.applyState},
+        phone=#{apply.phone}, applyName=#{apply.applyName}, familySum=#{apply.familySum}, idCard=#{apply.idCard}
+        where renterId=#{renterId}
+    </update>
+
+    <update id="updateApplyStateById">
+        update tb_apply set applyState=#{applyState} where renterId=#{renterId}
+    </update>
+
+    <select id="selectArea" resultType="com.cykj.bean.TbArea">
+        select * from tb_area where pid=#{pid}
+    </select>
+
+    <select id="findMsg" resultType="com.cykj.bean.TbMessage">
+        select * from tb_message where renterId=#{renterId}
+    </select>
+
+    <select id="selectTown" resultType="com.cykj.bean.TbCommunity">
+        select * from tb_community where toareaId=#{areaId}
+    </select>
+
+    <update id="updateMsgState">
+        update tb_message set messageState='已读' where messageId=#{messageId}
+    </update>
+
+    <!-- String selectPwd(@Param("renterId")int renterId);-->
+    <select id="selectPwd" resultType="java.lang.String">
+        select renterPwd from tb_renter where renterId=#{renterId}
+    </select>
+
+    <!--int updatePwd(@Param("pwd")String pwd, @Param("renterId")int renterId);-->
+    <update id="updatePwd">
+        update tb_renter set renterPwd=#{pwd} where renterId=#{renterId}
+    </update>
+
+</mapper>
